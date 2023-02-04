@@ -1,6 +1,11 @@
 import { Trash, Check } from 'phosphor-react';
 
-export const ListItems = () => {
+interface Props {
+  id: string;
+  content: string;
+}
+
+export const ListItems = ({ id, content }: Props) => {
   return (
     <div className="flex justify-between items-start bg-grayvar-300 border border-grayvar-400 rounded-lg p-4">
       <div className="flex items-start gap-2">
@@ -20,7 +25,9 @@ export const ListItems = () => {
           Duis vel sed fames integer.
         </span>
       </div>
-      <Trash className="min-w-[1.125rem] min-h-[1.125rem] text-grayvar-200 cursor-pointer hover:text-red-400 transition-colors" />
+      <button>
+        <Trash className="min-w-[1.125rem] min-h-[1.125rem] text-grayvar-200 cursor-pointer hover:text-red-400 transition-colors" />
+      </button>
     </div>
   );
 };

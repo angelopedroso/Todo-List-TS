@@ -15,3 +15,13 @@ body {
 #checkCompleted:checked .text-item-checked {
   @apply line-through text-grayvar-200;
 }
+
+.task-content::-webkit-scrollbar {
+  width: 0.625rem;
+  background-color: transparent;
+  border-radius: 1rem;
+}
+
+.task-content::-webkit-scrollbar-thumb {
+  @apply rounded-lg bg-grayvar-200;
+}

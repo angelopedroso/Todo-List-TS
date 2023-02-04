@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TodoEmpty } from './TodoEmpty';
 import { TodoList } from './TodoList';
 
@@ -6,8 +6,18 @@ const infoCss = 'flex gap-2';
 const counterCss =
   'text-center text-white font-normal bg-grayvar-300 min-w-[1.25rem] rounded-lg px-2';
 
-export const Todo = () => {
+interface Props {
+  taskItems: { id: string; content: string }[];
+}
+
+export const Todo = ({ taskItems }: Props) => {
   const [isArrayEmpty, setIsArrayEmpty] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (taskItems.length > 0) {
+      setIsArrayEmpty(false);
+    }
+  }, [taskItems]);
 
   return (
     <main className="flex flex-col justify-center items-center ">
@@ -23,7 +33,7 @@ export const Todo = () => {
           </div>
         </div>
         {isArrayEmpty && <TodoEmpty />}
-        {!isArrayEmpty && <TodoList />}
+        {!isArrayEmpty && <TodoList taskItems={taskItems} />}
       </div>
     </main>
   );

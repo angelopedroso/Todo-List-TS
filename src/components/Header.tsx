@@ -1,13 +1,11 @@
 import Logo from '../assets/Logo.svg';
 import { PlusCircle } from 'phosphor-react';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import { v4 as uuid } from 'uuid';
+import { TodoContext } from '../context';
 
-interface Props {
-  fetchTask: () => Promise<void>;
-}
-
-export const Header = ({ fetchTask }: Props) => {
+export const Header = () => {
+  const todoCtx = useContext(TodoContext);
   const [newTask, setNewTask] = useState<string>('');
 
   function addNewTaskHandler(event: FormEvent<HTMLInputElement>) {
@@ -17,16 +15,8 @@ export const Header = ({ fetchTask }: Props) => {
   async function submitTaskHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    await fetch(
-      'https://todolist-52d6c-default-rtdb.firebaseio.com/Task.json',
-      {
-        method: 'POST',
-        body: JSON.stringify({ id: uuid(), content: newTask }),
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
+    todoCtx?.addTodo(newTask);
 
-    fetchTask();
     setNewTask('');
   }
 

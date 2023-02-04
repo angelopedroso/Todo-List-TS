@@ -7,3 +7,11 @@ body {
   font-family: 'Inter', sans-serif;
   font-size: 0.875rem;
 }
+
+#checkCompleted:checked ~ .check-1 {
+  @apply opacity-100;
+}
+
+#checkCompleted:checked .text-item-checked {
+  @apply line-through text-grayvar-200;
+}
